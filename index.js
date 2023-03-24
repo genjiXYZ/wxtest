@@ -33,6 +33,15 @@ router.post("/api/count", async (ctx) => {
   };
 });
 
+router.post("/api/test", async (ctx) => {
+  const { request } = ctx;
+
+  ctx.body = {
+    code: 0,
+    data: request.body,
+  };
+});
+
 // 获取计数
 router.get("/api/count", async (ctx) => {
   const result = await Counter.count();
@@ -58,6 +67,8 @@ app
   .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
+
+
 
 const port = process.env.PORT || 3002;
 async function bootstrap() {
