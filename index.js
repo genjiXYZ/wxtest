@@ -51,15 +51,17 @@ router.get("/api/wx_openid", async (ctx) => {
 });
 
 const app = new Koa();
+app.use(require('koa-static')(__dirname + '/public'))
+
 app
   .use(logger())
   .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3002;
 async function bootstrap() {
-  await initDB();
+  // await initDB();
   app.listen(port, () => {
     console.log("启动成功", port);
   });
